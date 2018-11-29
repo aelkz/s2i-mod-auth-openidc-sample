@@ -1,0 +1,1 @@
+# s2i-mod-auth-openidc-sample
