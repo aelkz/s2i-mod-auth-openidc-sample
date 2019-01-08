@@ -26,7 +26,8 @@ ENV CJOSE_PKG cjose-${CJOSE_VERSION}-1.el7.x86_64.rpm
 RUN wget https://mod-auth-openidc.org/download/${CJOSE_PKG}
 RUN yum localinstall -y ~/${CJOSE_PKG}
 
-ENV MOD_AUTH_OPENIDC_VERSION 2.3.10rc0
+# 2.3.10rc0
+ENV MOD_AUTH_OPENIDC_VERSION 2.3.7
 ENV MOD_AUTH_OPENIDC_PKG mod_auth_openidc-${MOD_AUTH_OPENIDC_VERSION}-1.el7.x86_64.rpm
 RUN wget https://mod-auth-openidc.org/download/${MOD_AUTH_OPENIDC_PKG}
 #RUN yum localinstall -y ~/${MOD_AUTH_OPENIDC_PKG} --skip-broken
