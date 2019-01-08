@@ -6,5 +6,13 @@
 # For more information see the documentation:
 #	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
+export KEYCLOAK_HOST=${KEYCLOAK_HOST}
+export KEYCLOAK_REALM=${KEYCLOAK_REALM}
+export KEYCLOAK_CLIENT_ID=${KEYCLOAK_CLIENT_ID}
+export KEYCLOAK_CLIENT_SECRET=${KEYCLOAK_CLIENT_SECRET}
+export KEYCLOAK_REDIRECT_URI=${KEYCLOAK_REDIRECT_URI}
+export KEYCLOAK_CRYPTO_PASSPHRASE=${KEYCLOAK_CRYPTO_PASSPHRASE}
+export KEYCLOAK_OPENID_METATADA=${KEYCLOAK_OPENID_METATADA:https://${KEYCLOAK_HOST}/auth/realms/${KEYCLOAK_REALM}/.well-known/openid-configuration}
 
 exec asdf -p 8080
+
