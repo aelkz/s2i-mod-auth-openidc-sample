@@ -46,7 +46,7 @@ COPY ./root/ /
 
 # change environment variables for openid auth
 # change environment variables for openid auth
-ENV HTTPD_OPENID_CONF_PATH=./openid.conf
+ENV HTTPD_OPENID_CONF_PATH=openidc.conf
 ENV KEYCLOAK_REDIRECT_URI=$KEYCLOAK_REDIRECT_URI
 ENV KEYCLOAK_OPENID_METATADA=$KEYCLOAK_OPENID_METATADA
 ENV KEYCLOAK_CLIENT_ID=$KEYCLOAK_CLIENT_ID
