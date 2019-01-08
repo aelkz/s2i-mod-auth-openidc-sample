@@ -41,6 +41,9 @@ RUN ln -s /usr/lib64/httpd/modules/mod_auth_openidc.so /opt/rh/httpd24/root/etc/
 # sets io.openshift.s2i.scripts-url label that way, or update that label
 COPY ./s2i/bin/ /usr/libexec/s2i
 
+# change environment variables for openid auth
+RUN ./container-setup
+
 COPY openidc.conf /opt/rh/httpd24/root/etc/httpd/conf.d
 COPY protected /opt/rh/httpd24/root/var/www/html/protected
 
