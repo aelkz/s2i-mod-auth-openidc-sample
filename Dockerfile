@@ -42,6 +42,14 @@ RUN ln -s /usr/lib64/httpd/modules/mod_auth_openidc.so /opt/rh/httpd24/root/etc/
 COPY ./s2i/bin/ /usr/libexec/s2i
 
 # change environment variables for openid auth
+# change environment variables for openid auth
+ENV HTTPD_OPENID_CONF_PATH=./openid.conf
+ENV KEYCLOAK_REDIRECT_URI $KEYCLOAK_REDIRECT_URI
+ENV KEYCLOAK_OPENID_METATADA $KEYCLOAK_OPENID_METATADA
+ENV KEYCLOAK_CLIENT_ID $KEYCLOAK_CLIENT_ID
+ENV KEYCLOAK_CLIENT_SECRET $KEYCLOAK_CLIENT_SECRET
+ENV KEYCLOAK_JWKS_REFRESH_INTERVAL $KEYCLOAK_JWKS_REFRESH_INTERVAL
+
 RUN ./container-setup
 
 COPY openidc.conf /opt/rh/httpd24/root/etc/httpd/conf.d
