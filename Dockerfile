@@ -55,14 +55,14 @@ ENV KEYCLOAK_JWKS_REFRESH_INTERVAL=$KEYCLOAK_JWKS_REFRESH_INTERVAL
 
 # RUN /usr/libexec/container-setup
 
-RUN sed -i "s/^OIDCRedirectURI.*/OIDCRedirectURI ${KEYCLOAK_REDIRECT_URI}/" ${HTTPD_OPENID_CONF_PATH}
-RUN sed -i "s/^OIDCProviderMetadataURL.*/OIDCProviderMetadataURL ${KEYCLOAK_OPENID_METATADA} ${HTTPD_OPENID_CONF_PATH}
-RUN sed -i "s/^OIDCClientID.*/OIDCClientID ${KEYCLOAK_CLIENT_ID} ${HTTPD_OPENID_CONF_PATH}
-RUN sed -i "s/^OIDCClientSecret.*/OIDCClientSecret ${KEYCLOAK_CLIENT_SECRET} ${HTTPD_OPENID_CONF_PATH}
-RUN sed -i "s/^OIDCJWKSRefreshInterval.*/OIDCJWKSRefreshInterval ${KEYCLOAK_JWKS_REFRESH_INTERVAL} ${HTTPD_OPENID_CONF_PATH}
-
 COPY openidc.conf /opt/rh/httpd24/root/etc/httpd/conf.d
 COPY protected /opt/rh/httpd24/root/var/www/html/protected
+
+RUN sed -i "s/^OIDCRedirectURI.*/OIDCRedirectURI ${KEYCLOAK_REDIRECT_URI}/" /opt/rh/httpd24/root/etc/httpd/conf.d/${HTTPD_OPENID_CONF_PATH}
+RUN sed -i "s/^OIDCProviderMetadataURL.*/OIDCProviderMetadataURL ${KEYCLOAK_OPENID_METATADA} /opt/rh/httpd24/root/etc/httpd/conf.d/${HTTPD_OPENID_CONF_PATH}
+RUN sed -i "s/^OIDCClientID.*/OIDCClientID ${KEYCLOAK_CLIENT_ID} /opt/rh/httpd24/root/etc/httpd/conf.d/${HTTPD_OPENID_CONF_PATH}
+RUN sed -i "s/^OIDCClientSecret.*/OIDCClientSecret ${KEYCLOAK_CLIENT_SECRET} /opt/rh/httpd24/root/etc/httpd/conf.d/${HTTPD_OPENID_CONF_PATH}
+RUN sed -i "s/^OIDCJWKSRefreshInterval.*/OIDCJWKSRefreshInterval ${KEYCLOAK_JWKS_REFRESH_INTERVAL} /opt/rh/httpd24/root/etc/httpd/conf.d/${HTTPD_OPENID_CONF_PATH}
 
 # TODO: Drop the root user and make the content of /opt/app-root owned by user 1001
 # RUN chown -R 1001:1001 /opt/app-root
