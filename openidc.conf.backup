@@ -1,9 +1,9 @@
 
-OIDCRedirectURI http://zf2-apirest-php-zf2-mysql.apps.arekkusu.io/api/
-OIDCProviderMetadataURL https://secure-sso.apps.arekkusu.io/auth/realms/master/.well-known/openid-configuration
-OIDCClientID phpzf2
-OIDCClientSecret 8b742bfd-4633-481d-8bec-33961f866802
-OIDCJWKSRefreshInterval 3600
+OIDCRedirectURI ${KEYCLOAK_REDIRECT_URI}
+OIDCProviderMetadataURL ${KEYCLOAK_OPENID_METATADA}
+OIDCClientID ${KEYCLOAK_CLIENT_ID}
+OIDCClientSecret ${KEYCLOAK_CLIENT_SECRET}
+OIDCJWKSRefreshInterval ${KEYCLOAK_JWKS_REFRESH_INTERVAL}
 
 # you can add additional requirements here.
 # see: 
