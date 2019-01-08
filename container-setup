@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+sed -i "s/^OIDCRedirectURI.*/OIDCRedirectURI ${KEYCLOAK_REDIRECT_URI}/" ${HTTPD_OPENID_CONF_PATH}/openid.conf
+sed -i "s/^OIDCProviderMetadataURL.*/OIDCProviderMetadataURL ${KEYCLOAK_OPENID_METATADA}
+sed -i "s/^OIDCClientID.*/OIDCClientID ${KEYCLOAK_CLIENT_ID}
+sed -i "s/^OIDCClientSecret.*/OIDCClientSecret ${KEYCLOAK_CLIENT_SECRET}
+sed -i "s/^OIDCJWKSRefreshInterval.*/OIDCJWKSRefreshInterval ${KEYCLOAK_JWKS_REFRESH_INTERVAL}
