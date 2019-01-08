@@ -45,13 +45,12 @@ COPY ./s2i/bin/ /usr/libexec/s2i
 COPY ./root/ /
 
 # change environment variables for openid auth
-# change environment variables for openid auth
 ENV HTTPD_OPENID_CONF_PATH=openidc.conf
-ENV KEYCLOAK_REDIRECT_URI=$KEYCLOAK_REDIRECT_URI
-ENV KEYCLOAK_OPENID_METATADA=$KEYCLOAK_OPENID_METATADA
-ENV KEYCLOAK_CLIENT_ID=$KEYCLOAK_CLIENT_ID
-ENV KEYCLOAK_CLIENT_SECRET=$KEYCLOAK_CLIENT_SECRET
-ENV KEYCLOAK_JWKS_REFRESH_INTERVAL=$KEYCLOAK_JWKS_REFRESH_INTERVAL
+ARG KEYCLOAK_REDIRECT_URI=http://zf2-apirest-php-zf2-mysql.apps.arekkusu.io/api/
+ARG KEYCLOAK_OPENID_METATADA=https://secure-sso.apps.arekkusu.io/auth/realms/master/.well-known/openid-configuration
+ARG KEYCLOAK_CLIENT_ID=phpzf2
+ARG KEYCLOAK_CLIENT_SECRET=8b742bfd-4633-481d-8bec-33961f866802
+ARG KEYCLOAK_JWKS_REFRESH_INTERVAL=3600
 
 # RUN /usr/libexec/container-setup
 
