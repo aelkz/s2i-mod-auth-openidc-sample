@@ -46,22 +46,22 @@ COPY ./root/ /
 
 # change environment variables for openid auth
 ENV HTTPD_OPENID_CONF_PATH=openidc.conf
-ARG KEYCLOAK_REDIRECT_URI=http://zf2-apirest-php-zf2-mysql.apps.arekkusu.io/api/
-ARG KEYCLOAK_OPENID_METATADA=https://secure-sso.apps.arekkusu.io/auth/realms/master/.well-known/openid-configuration
-ARG KEYCLOAK_CLIENT_ID=phpzf2
-ARG KEYCLOAK_CLIENT_SECRET=8b742bfd-4633-481d-8bec-33961f866802
-ARG KEYCLOAK_JWKS_REFRESH_INTERVAL=3600
+ENV KEYCLOAK_REDIRECT_URI=http://zf2-apirest-php-zf2-mysql.apps.arekkusu.io/api/
+ENV KEYCLOAK_OPENID_METATADA=https://secure-sso.apps.arekkusu.io/auth/realms/master/.well-known/openid-configuration
+ENV KEYCLOAK_CLIENT_ID=phpzf2
+ENV KEYCLOAK_CLIENT_SECRET=8b742bfd-4633-481d-8bec-33961f866802
+ENV KEYCLOAK_JWKS_REFRESH_INTERVAL=3600
 
 # RUN /usr/libexec/container-setup
 
 COPY openidc.conf /opt/rh/httpd24/root/etc/httpd/conf.d
 COPY protected /opt/rh/httpd24/root/var/www/html/protected
 
-RUN sed -i "s/^OIDCRedirectURI.*/OIDCRedirectURI ${KEYCLOAK_REDIRECT_URI}/" /opt/rh/httpd24/root/etc/httpd/conf.d/${HTTPD_OPENID_CONF_PATH}
-RUN sed -i "s/^OIDCProviderMetadataURL.*/OIDCProviderMetadataURL ${KEYCLOAK_OPENID_METATADA}/" /opt/rh/httpd24/root/etc/httpd/conf.d/${HTTPD_OPENID_CONF_PATH}
-RUN sed -i "s/^OIDCClientID.*/OIDCClientID ${KEYCLOAK_CLIENT_ID}/" /opt/rh/httpd24/root/etc/httpd/conf.d/${HTTPD_OPENID_CONF_PATH}
-RUN sed -i "s/^OIDCClientSecret.*/OIDCClientSecret ${KEYCLOAK_CLIENT_SECRET}/" /opt/rh/httpd24/root/etc/httpd/conf.d/${HTTPD_OPENID_CONF_PATH}
-RUN sed -i "s/^OIDCJWKSRefreshInterval.*/OIDCJWKSRefreshInterval ${KEYCLOAK_JWKS_REFRESH_INTERVAL}/" /opt/rh/httpd24/root/etc/httpd/conf.d/${HTTPD_OPENID_CONF_PATH}
+RUN sed -i "s/^OIDCRedirectURI.*/OIDCRedirectURI \"${KEYCLOAK_REDIRECT_URI}\"/" /opt/rh/httpd24/root/etc/httpd/conf.d/openidc.conf
+RUN sed -i "s/^OIDCProviderMetadataURL.*/OIDCProviderMetadataURL \"${KEYCLOAK_OPENID_METATADA}\"/" /opt/rh/httpd24/root/etc/httpd/conf.d/openidc.conf
+RUN sed -i "s/^OIDCClientID.*/OIDCClientID \"${KEYCLOAK_CLIENT_ID}\"/" /opt/rh/httpd24/root/etc/httpd/conf.d/openidc.conf
+RUN sed -i "s/^OIDCClientSecret.*/OIDCClientSecret \"${KEYCLOAK_CLIENT_SECRET}\"/" /opt/rh/httpd24/root/etc/httpd/conf.d/openidc.conf
+RUN sed -i "s/^OIDCJWKSRefreshInterval.*/OIDCJWKSRefreshInterval \"${KEYCLOAK_JWKS_REFRESH_INTERVAL}\"/" /opt/rh/httpd24/root/etc/httpd/conf.d/openidc.conf
 
 # TODO: Drop the root user and make the content of /opt/app-root owned by user 1001
 # RUN chown -R 1001:1001 /opt/app-root
